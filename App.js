@@ -1,17 +1,13 @@
-define(["backbone",'LayoutView'], function (Backbone, LayoutView) {
+define(["backbone",'views/LayoutView'], function (Backbone, LayoutView) {
   return  Backbone.Router.extend({
     initialize: function () {
       this.route(":module", "module");
-      this.route("", "index");
+      this.layout = new LayoutView({
+        el: document.body
+      });
     },
     module: function (module) {
-      console.log(module)
-    },
-    index: function () {
-      console.log('index');
-      new LayoutView({
-        el: document.body
-      }).render()
+      this.layout.load(module);
     }
   });
 });
